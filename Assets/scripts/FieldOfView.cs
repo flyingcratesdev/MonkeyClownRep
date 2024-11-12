@@ -15,13 +15,13 @@ public class FieldOfView : MonoBehaviour
     private float startingAngle;
     int rayCount = 40;
     float viewDistance = 5f;
-
+    public enemyScript enemy;
     void Start()
     {
 
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
-        origin = Vector3.zero;
+       
     }
     
 
@@ -69,7 +69,11 @@ public class FieldOfView : MonoBehaviour
             }
             else
             {
+                if(raycastHit2D.collider.GetComponent<playerController>())
+                {
+                    enemy.PlayerFound();
 
+                }
                 vertex = raycastHit2D.point;
 
             }
