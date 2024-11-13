@@ -18,6 +18,8 @@ public class enemyScript : MonoBehaviour
     private float spottedTime = 3;
     [SerializeField]
     private float spottedTimer;
+    int previousIndex = -1;
+    float minDistance = 0.4f;
     // Start is called before the first frame update
     void Start()
     {
@@ -46,43 +48,27 @@ public class enemyScript : MonoBehaviour
 
         if (stateID == 0)
         {
-            if (Vector2.Distance(transform.position, patrolPoints[0].position) > 0.25f && patrolIndex == 0)
+            if (Vector2.Distance(transform.position, patrolPoints[patrolIndex].position) > minDistance)
             {
-                agent.SetDestination(patrolPoints[0].position);
+                agent.SetDestination(patrolPoints[patrolIndex].position);
             }
-            else if (patrolIndex == 0)
+            else
             {
+                // Update the previous index
+                previousIndex = patrolIndex;
 
-                patrolIndex++;
-            }
-            if (Vector2.Distance(transform.position, patrolPoints[1].position) > 0.25f && patrolIndex == 1)
-            {
-                agent.SetDestination(patrolPoints[1].position);
-            }
-            else if (patrolIndex == 1)
-            {
+                // Select a new random index that is different from the previous index
+                do
+                {
+                    patrolIndex = Random.Range(0, patrolPoints.Length);
+                }
+                while (patrolIndex == previousIndex);
 
-                patrolIndex++;
+                // Set the destination to the new patrol point
+                agent.SetDestination(patrolPoints[patrolIndex].position);
             }
-            if (Vector2.Distance(transform.position, patrolPoints[2].position) > 0.25f && patrolIndex == 2)
-            {
-                agent.SetDestination(patrolPoints[2].position);
-            }
-            else if (patrolIndex == 2)
-            {
-
-                patrolIndex++;
-            }
-            if (Vector2.Distance(transform.position, patrolPoints[3].position) > 0.25f && patrolIndex == 3)
-            {
-                agent.SetDestination(patrolPoints[3].position);
-            }
-            else if (patrolIndex == 3)
-            {
-
-                patrolIndex = 0;
-            }
-        }else if(stateID == 1) {
+        }
+        else if(stateID == 1) {
 
             agent.SetDestination(player.position);
         }
