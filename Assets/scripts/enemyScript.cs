@@ -23,6 +23,8 @@ public class enemyScript : MonoBehaviour
     int previousIndex = -1;
     float minDistance = 0.4f;
 
+    public float stunTimer = 3;
+    public float destroyTimer = 3;
 
     //Distraction item detection
     public float radius = 5;
@@ -65,7 +67,9 @@ public class enemyScript : MonoBehaviour
             agent.SetDestination(currentDistraction.transform.position);
             if (Vector2.Distance(transform.position, currentDistraction.transform.position) <= 0.5f)
             {
-                Destroy(currentDistraction);
+
+                StartCoroutine(stunEnemy(stunTimer));
+                StartCoroutine(destroyDistraction(destroyTimer));
                 currentDistraction = null;
 
             }
@@ -112,11 +116,27 @@ public class enemyScript : MonoBehaviour
             }
            
         }
+
     }
+
+
+    IEnumerator stunEnemy(float stunTimer)
+    {
+        Debug.Log("stunned");
+        yield return new WaitForSeconds(stunTimer);
+        agent.velocity = Vector2.zero;
+        stateID = 0;
+    }
+
+    IEnumerator destroyDistraction(float destroyTimer)
+    {
+        yield return new WaitForSeconds(destroyTimer);
+        Destroy(currentDistraction);
+    }
+
     public void PlayerFound()
     {
         spottedTimer = spottedTime;
-     
     }
 
 }
