@@ -14,7 +14,7 @@ public class DistractionObject : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     public void VelocityReset(float time)
     {
@@ -52,4 +52,5 @@ public class DistractionObject : MonoBehaviour
             ZeroVel();
         }
     }
+
 }
