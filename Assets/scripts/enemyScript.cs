@@ -123,8 +123,10 @@ public class enemyScript : MonoBehaviour
     IEnumerator stunEnemy(float stunTimer)
     {
         Debug.Log("stunned");
-        yield return new WaitForSeconds(stunTimer);
+        agent.speed = 0;
         agent.velocity = Vector2.zero;
+
+        yield return new WaitForSeconds(stunTimer);
         stateID = 0;
     }
 
@@ -139,4 +141,10 @@ public class enemyScript : MonoBehaviour
         spottedTimer = spottedTime;
     }
 
+    public void StunPlayer()
+    {
+        StartCoroutine(stunEnemy(5));
+
+
+    }
 }

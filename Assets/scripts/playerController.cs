@@ -77,8 +77,10 @@ public class playerController : MonoBehaviour
                 else if (timeThrow > 0)
                 {
                     throwObject(timeThrow);
+                    currentItem = 0;
 
                 }
+
                 break;
             case 2:
                 if (Input.GetKey(KeyCode.Mouse0))

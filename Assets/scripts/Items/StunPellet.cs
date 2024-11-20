@@ -14,8 +14,22 @@ public class StunPellet : MonoBehaviour
         Destroy(gameObject, deathTime);
     }
 
+
+
     void Update()
     {
         
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.GetComponent<enemyScript>()) {
+
+            collision.GetComponent<enemyScript>().StunPlayer();
+            print("Trigger");
+            Destroy(gameObject);
+
+
+        }
     }
 }
