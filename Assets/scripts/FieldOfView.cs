@@ -9,12 +9,12 @@ public class FieldOfView : MonoBehaviour
     [SerializeField]
     private LayerMask layerMask;
     private Mesh mesh;
-    float fov = 75f;
+    public float fov = 75f;
     Vector3 origin;
     [SerializeField]
     private float startingAngle;
     int rayCount = 40;
-    float viewDistance = 5f;
+    public float viewDistance = 5f;
     public enemyScript enemy;
     void Start()
     {

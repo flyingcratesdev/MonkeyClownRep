@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class playerController : MonoBehaviour
 {
-
+    [Range(0f, 10f)]
     public float playerSpeed;
     private float horizontalSpeed, verticalSpeed;
     Rigidbody2D rb;
