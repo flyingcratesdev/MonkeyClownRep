@@ -18,7 +18,7 @@ public class FieldOfView : MonoBehaviour
     public enemyScript enemy;
     void Start()
     {
-
+        transform.position = Vector3.zero;
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
        

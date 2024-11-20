@@ -20,6 +20,13 @@ public class playerController : MonoBehaviour
 
     Vector2 mousePosition;
 
+    //StunGun
+    public GameObject StunPellet;
+
+
+    public ItemPickUp potentialItem;
+    //ID bananna, stunball, 
+    public int currentItem;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,16 +39,67 @@ public class playerController : MonoBehaviour
         movePlayer();
 
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        UsingItems();
+        PickUpItem();
+    }
 
-        if(Input.GetKey(KeyCode.Mouse0))
+
+
+    void PickUpItem()
+    {
+        if( Input.GetKeyDown(KeyCode.E))
         {
-            if(timeThrow <= maxThrowTime)
-            timeThrow += Time.deltaTime;
-        }else if (timeThrow > 0)
-        {
-            throwObject(timeThrow);
+
+            currentItem = potentialItem.GetItem();
+            Destroy(potentialItem.gameObject);
+            potentialItem = null;
+
 
         }
+
+
+
+    }
+
+    void UsingItems()
+    {
+        switch(currentItem)
+        {
+            case 0:
+
+                break;
+            case 1:
+                if (Input.GetKey(KeyCode.Mouse0))
+                {
+                    if (timeThrow <= maxThrowTime)
+                        timeThrow += Time.deltaTime;
+                }
+                else if (timeThrow > 0)
+                {
+                    throwObject(timeThrow);
+
+                }
+                break;
+            case 2:
+                if (Input.GetKey(KeyCode.Mouse0))
+                {
+                    GameObject ball = Instantiate(StunPellet, firePoint.position, firePoint.rotation);
+                    
+                    currentItem = 0;
+                }
+
+                    break;
+            case 3:
+
+
+                break;
+        }
+
+
+
+      
+
+
     }
 
     void throwObject(float force)
@@ -71,6 +129,22 @@ public class playerController : MonoBehaviour
         if(collision.GetComponent<enemyScript>()) {
             SceneManager.LoadScene(0);
         
+        }
+        if (collision.GetComponent<ItemPickUp>())
+        {
+            potentialItem = collision.GetComponent<ItemPickUp>();
+
+        }
+
+    }
+
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision.GetComponent<ItemPickUp>()) {
+            potentialItem = null;
+
+
         }
     }
 }
