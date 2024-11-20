@@ -8,6 +8,7 @@ using static UnityEngine.GraphicsBuffer;
 
 public class enemyScript : MonoBehaviour
 {
+    public float rotationSpeed = 5;
     public FieldOfView view;
     public Transform[] patrolPoints;
     public int patrolIndex = 0;
@@ -25,7 +26,7 @@ public class enemyScript : MonoBehaviour
 
     public float stunTimer = 3;
     public float destroyTimer = 3;
-
+    public bool isStunned = false;
     //Distraction item detection
     public float radius = 5;
     public LayerMask detectionMask;
@@ -39,29 +40,42 @@ public class enemyScript : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   
-        if(spottedTimer > 0)
-        {
-            agent.speed = moveSpeed * 1.5f;
-
-            stateID = 1;
-            spottedTimer -= Time.deltaTime;
-        }else if(currentDistraction != null)
-        {
-
-            stateID = 2;
-        }
-        else
-        {
-            stateID = 0;
-        }
-
+    {
         Vector2 direction = (agent.destination - transform.position).normalized;
 
-        float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f; 
+        float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
 
-        float angle = Mathf.LerpAngle(transform.eulerAngles.z, targetAngle, 4 * Time.deltaTime);
-        transform.rotation = Quaternion.Euler(0, 0, angle);
+        float angle = Mathf.LerpAngle(transform.eulerAngles.z, targetAngle, rotationSpeed * Time.deltaTime);
+        if (!isStunned)
+        {
+            if (spottedTimer > 0)
+            {
+                agent.speed = moveSpeed * 1.5f;
+
+                stateID = 1;
+                spottedTimer -= Time.deltaTime;
+            }
+            else if (currentDistraction != null)
+            {
+
+                stateID = 2;
+            }
+            else
+            {
+                stateID = 0;
+            }
+
+ 
+            transform.rotation = Quaternion.Euler(0, 0, angle);
+        }else
+        {
+
+
+            if (spottedTimer > 0)
+            {
+                spottedTimer -= Time.deltaTime;
+            }
+        }
         if(stateID == 2)
         {
             agent.SetDestination(currentDistraction.transform.position);
@@ -123,9 +137,14 @@ public class enemyScript : MonoBehaviour
     IEnumerator stunEnemy(float stunTimer)
     {
         Debug.Log("stunned");
+        stateID = -1;
+        isStunned = true;
         agent.speed = 0;
         agent.velocity = Vector2.zero;
         yield return new WaitForSeconds(stunTimer);
+        isStunned = false;
+        agent.speed = moveSpeed;
+
         stateID = 0;
     }
 
