@@ -123,6 +123,7 @@ public class enemyScript : MonoBehaviour
     IEnumerator stunEnemy(float stunTimer)
     {
         Debug.Log("stunned");
+        agent.speed = 0;
         agent.velocity = Vector2.zero;
         yield return new WaitForSeconds(stunTimer);
         stateID = 0;
