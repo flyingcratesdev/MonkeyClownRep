@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class playerController : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class playerController : MonoBehaviour
     public Transform firePoint;
 
     public float objectSpeed;
+    public float timeThrow;
+    public float maxThrowTime = 6;
 
     Vector2 mousePosition;
 
@@ -30,23 +33,31 @@ public class playerController : MonoBehaviour
 
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetKey(KeyCode.Mouse0))
         {
-            throwObject();
+            if(timeThrow <= maxThrowTime)
+            timeThrow += Time.deltaTime;
+        }else if (timeThrow > 0)
+        {
+            throwObject(timeThrow);
+
         }
     }
 
-    void throwObject()
+    void throwObject(float force)
     {
         GameObject distraction = Instantiate(distractionObject, firePoint.position, firePoint.rotation);
-        distraction.GetComponent<Rigidbody2D>();
+        distraction.GetComponent<Rigidbody2D>().AddForce(transform.up * force / 35);
+
+        distraction.GetComponent<DistractionObject>().VelocityReset(0.5f);
+        timeThrow = 0;
     }
 
     void movePlayer()
     {
-        horizontalSpeed = Input.GetAxisRaw("Horizontal") * playerSpeed;
-        verticalSpeed = Input.GetAxisRaw("Vertical") * playerSpeed;
-        rb.velocity = new Vector2(horizontalSpeed, verticalSpeed);
+        horizontalSpeed = Input.GetAxisRaw("Horizontal");
+        verticalSpeed = Input.GetAxisRaw("Vertical");
+        rb.velocity = new Vector2(horizontalSpeed, verticalSpeed).normalized * playerSpeed;
     }
 
     private void FixedUpdate()
@@ -55,5 +66,11 @@ public class playerController : MonoBehaviour
         float aimAngle = Mathf.Atan2(aimDirection.y, aimDirection.x) * Mathf.Rad2Deg - 90f;
         rb.rotation = aimAngle;
     }
-
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.GetComponent<enemyScript>()) {
+            SceneManager.LoadScene(0);
+        
+        }
+    }
 }
