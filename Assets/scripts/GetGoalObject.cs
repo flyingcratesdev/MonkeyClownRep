@@ -12,6 +12,7 @@ public class GetGoalObject : MonoBehaviour
         {
             // Destroy the banana object to make it disappear
             Destroy(gameObject);
+            Debug.Log("Player got the Gold Banana!");
         }
     }
 }
