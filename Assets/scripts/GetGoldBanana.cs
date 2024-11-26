@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GetGoalObject : MonoBehaviour
+public class GetGoldBanana : MonoBehaviour
 {
     // Called when another object enters the collider
     private void OnTriggerEnter2D(Collider2D other)
