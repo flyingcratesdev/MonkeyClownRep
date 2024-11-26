@@ -5,6 +5,7 @@ using UnityEngine;
 public class ItemPickUp : MonoBehaviour
 {
     public int itemID = 0;
+    public string itemName; 
     void Start()
     {
         

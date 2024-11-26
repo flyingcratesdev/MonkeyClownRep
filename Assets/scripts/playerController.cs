@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
+
 
 public class playerController : MonoBehaviour
 {
@@ -25,8 +26,10 @@ public class playerController : MonoBehaviour
 
 
     public ItemPickUp potentialItem;
+    public TMP_Text itemText;
     //ID bananna, stunball, 
     public int currentItem;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,6 +54,7 @@ public class playerController : MonoBehaviour
         {
 
             currentItem = potentialItem.GetItem();
+            itemText.text = potentialItem.itemName;
             Destroy(potentialItem.gameObject);
             potentialItem = null;
 
