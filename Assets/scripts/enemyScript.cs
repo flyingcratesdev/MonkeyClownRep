@@ -36,6 +36,7 @@ public class enemyScript : MonoBehaviour
         agent.speed = moveSpeed;
         agent.updateRotation = false;
         agent.updateUpAxis = false;
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Update is called once per frame
@@ -158,7 +159,10 @@ public class enemyScript : MonoBehaviour
     {
         spottedTimer = spottedTime;
     }
-
+    public void PlayerHidden()
+    {
+        spottedTimer = 0;
+    }
     public void StunPlayer()
     {
         StartCoroutine(stunEnemy(5));

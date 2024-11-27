@@ -20,7 +20,7 @@ public class PlayerHiding : MonoBehaviour
     {
         // Disable re-entry immediately
         canReenterBarrel = false;
-
+        player.GetComponent<playerController>().isHidden = true;
         // Move the player to the center of the barrel
         player.transform.position = transform.position;
 
@@ -43,6 +43,7 @@ public class PlayerHiding : MonoBehaviour
         // Wait for the player to move
         yield return new WaitUntil(() =>
             rb != null && (rb.velocity.magnitude > 0.1f || Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0));
+            player.GetComponent<playerController>().isHidden = false;
 
         // Wait 3 seconds before allowing the player to re-enter
         yield return new WaitForSeconds(1f);

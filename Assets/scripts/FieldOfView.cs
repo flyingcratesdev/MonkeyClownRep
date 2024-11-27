@@ -18,7 +18,7 @@ public class FieldOfView : MonoBehaviour
     public enemyScript enemy;
     void Start()
     {
-        transform.position = new Vector3(0,0,-0.4f);
+        transform.position = new Vector3(0,0,0f);
         mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
        
@@ -69,10 +69,19 @@ public class FieldOfView : MonoBehaviour
             }
             else
             {
-                if(raycastHit2D.collider.GetComponent<playerController>())
+                if (raycastHit2D.collider.GetComponent<playerController>())
                 {
-                    enemy.PlayerFound();
+                    if (raycastHit2D.collider.GetComponent<playerController>().isHidden)
+                    {
+                        enemy.PlayerHidden();
 
+
+                    }
+                    else if (raycastHit2D.collider.GetComponent<playerController>())
+                    {
+                        enemy.PlayerFound();
+
+                    }
                 }
                 vertex = raycastHit2D.point;
 

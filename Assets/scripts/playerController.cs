@@ -18,7 +18,7 @@ public class playerController : MonoBehaviour
     public float objectSpeed;
     public float timeThrow;
     public float maxThrowTime = 6;
-
+    public bool isHidden = false;
     Vector2 mousePosition;
 
     //StunGun
@@ -81,6 +81,8 @@ public class playerController : MonoBehaviour
                 else if (timeThrow > 0)
                 {
                     throwObject(timeThrow);
+                    itemText.text = "";
+
                     currentItem = 0;
 
                 }
@@ -90,14 +92,22 @@ public class playerController : MonoBehaviour
                 if (Input.GetKey(KeyCode.Mouse0))
                 {
                     GameObject ball = Instantiate(StunPellet, firePoint.position, firePoint.rotation);
-                    
+                    itemText.text = "";
+
                     currentItem = 0;
                 }
 
                     break;
             case 3:
+                if (Input.GetKey(KeyCode.Mouse0))
+                {
 
+                    playerSpeed *= 2;
+                    Invoke("SpeedReset", 2);
+                    itemText.text = "";
 
+                    currentItem = 0;
+                }
                 break;
         }
 
@@ -105,6 +115,12 @@ public class playerController : MonoBehaviour
 
       
 
+
+    }
+    void SpeedReset()
+    {
+
+        playerSpeed = 3.5f;
 
     }
 
