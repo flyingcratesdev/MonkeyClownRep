@@ -8,17 +8,17 @@ public class PlayerHiding : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Check if the colliding object has the "Player" tag
+        // Checks if the colliding object has the Player tag
         if (collision.CompareTag("Player") && canReenterBarrel)
         {
-            // Start the hiding process
+            // Starts hiding
             StartCoroutine(HidePlayer(collision.gameObject));
         }
     }
 
     private IEnumerator HidePlayer(GameObject player)
     {
-        // Disable re-entry immediately
+        // Disable immediate re-entry
         canReenterBarrel = false;
         player.GetComponent<playerController>().isHidden = true;
         // Move the player to the center of the barrel
@@ -32,7 +32,7 @@ public class PlayerHiding : MonoBehaviour
             rb.constraints = RigidbodyConstraints2D.FreezePosition; // Freeze position
         }
 
-        yield return new WaitForSeconds(2f); // Wait for 1 second
+        yield return new WaitForSeconds(1f); // Wait for 1 second
 
         // Allow the player to move again
         if (rb != null)
@@ -45,8 +45,8 @@ public class PlayerHiding : MonoBehaviour
             rb != null && (rb.velocity.magnitude > 0.1f || Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0));
             player.GetComponent<playerController>().isHidden = false;
 
-        // Wait 3 seconds before allowing the player to re-enter
-        yield return new WaitForSeconds(1f);
+        // Wait .5 seconds before allowing the player to re-enter
+        yield return new WaitForSeconds(.5f);
 
         canReenterBarrel = true;
     }
