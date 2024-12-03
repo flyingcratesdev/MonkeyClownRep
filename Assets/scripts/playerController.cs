@@ -29,6 +29,7 @@ public class playerController : MonoBehaviour
     public TMP_Text itemText;
     //ID bananna, stunball, 
     public int currentItem;
+    public int itemSwitchTag = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +45,7 @@ public class playerController : MonoBehaviour
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         UsingItems();
         PickUpItem();
+        switchItem();
     }
 
 
@@ -63,6 +65,25 @@ public class playerController : MonoBehaviour
 
 
 
+    }
+
+    void switchItem()
+    {
+        if (Input.GetKey(KeyCode.Tab))
+        {
+            if (itemSwitchTag == 0)
+            {
+                currentItem = 1;
+                itemSwitchTag = 1;
+            }
+            else if (itemSwitchTag == 1)
+            {
+                currentItem = 2;
+                itemSwitchTag = 0;
+            }
+        }
+
+        
     }
 
     void UsingItems()
