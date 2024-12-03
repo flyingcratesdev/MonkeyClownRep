@@ -7,8 +7,14 @@ public class Door : MonoBehaviour
     public float smoothTime = 0.3f;    // Time for smooth transition
     public float maxSpeed = 10f;       // Maximum movement speed
     public bool isOpen = false;
+    private bool isLocked = true;
     private Vector2 currentVelocity;   // Stores the current velocity
 
+
+    void Start()
+    {
+        Key.OnKeyCollected += UnlockDoor;
+    }
     void Update()
     {
         if (isOpen)
@@ -34,12 +40,21 @@ public class Door : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        Key.OnKeyCollected -= UnlockDoor;
+    }
+
+    private void UnlockDoor()
+    {
+        isLocked = false;
+        GetComponent<SpriteRenderer>().color = Color.green;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<playerController>())
+        if (collision.GetComponent<playerController>() && !isLocked)
         {
-
-
             isOpen = true;
         }
     }
