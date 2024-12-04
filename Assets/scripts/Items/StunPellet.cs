@@ -5,7 +5,7 @@ using UnityEngine;
 public class StunPellet : MonoBehaviour
 {
 
-
+    public bool isBullet = false;
     public float force = 4;
     public float deathTime = 3f;
     void Awake()
@@ -25,9 +25,20 @@ public class StunPellet : MonoBehaviour
     {
         if(collision.GetComponent<enemyScript>()) {
 
-            collision.GetComponent<enemyScript>().StunPlayer();
-            print("Trigger");
-            Destroy(gameObject);
+            if(!isBullet)
+            {
+                collision.GetComponent<enemyScript>().StunPlayer();
+                Destroy(gameObject);
+
+
+            }else
+            {
+                collision.GetComponent<enemyScript>().TakeDamage();
+                Destroy(gameObject);
+
+
+            }
+
 
 
         }

@@ -464,6 +464,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   currentDistraction: {fileID: 0}
+  health: 0
+  maxHealth: 4
+  baseClown: {fileID: 5084043181814869715}
 --- !u!212 &6479399145284599832
 SpriteRenderer:
   m_ObjectHideFlags: 0

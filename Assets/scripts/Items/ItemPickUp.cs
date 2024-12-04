@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class ItemPickUp : MonoBehaviour
 {
-    public int itemID = 0;
-    public string itemName; 
+    public Item item;
     void Start()
     {
         
@@ -23,6 +22,6 @@ public class ItemPickUp : MonoBehaviour
     {
 
 
-        return itemID;
+        return item.id;
     }
 }

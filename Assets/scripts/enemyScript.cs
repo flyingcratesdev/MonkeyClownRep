@@ -31,8 +31,12 @@ public class enemyScript : MonoBehaviour
     public float radius = 5;
     public LayerMask detectionMask;
     public GameObject currentDistraction;
+    public int health;
+    public int maxHealth = 4;
+    public GameObject baseClown;
     void Start()
     {
+        health = maxHealth;
         agent.speed = moveSpeed;
         agent.updateRotation = false;
         agent.updateUpAxis = false;
@@ -155,6 +159,18 @@ public class enemyScript : MonoBehaviour
         Destroy(currentDistraction);
     }
 
+    public void TakeDamage()
+    {
+
+        health--;
+        if(health <= 0)
+        {
+            Destroy(baseClown); 
+
+        }
+
+
+    }
     public void PlayerFound()
     {
         spottedTimer = spottedTime;

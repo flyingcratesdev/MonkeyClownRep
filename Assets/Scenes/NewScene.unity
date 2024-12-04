@@ -1480,7 +1480,7 @@ MonoBehaviour:
   m_VoxelSize: 0.16666667
   m_BuildHeightMesh: 0
   m_HideEditorLogs: 0
-  m_NavMeshData: {fileID: 23800000, guid: b3ae34e2ea3d800408fc33c20f053da1, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 5ce2e999eb142944cbe8893862aa32a3, type: 2}
 --- !u!4 &975880066
 Transform:
   m_ObjectHideFlags: 0
@@ -3142,10 +3142,12 @@ MonoBehaviour:
   objectSpeed: 0
   timeThrow: 0
   maxThrowTime: 1.1
+  isHidden: 0
   StunPellet: {fileID: 2308929020080410333, guid: aaace4718559b334886621fa02dde54c, type: 3}
   potentialItem: {fileID: 0}
   itemText: {fileID: 0}
   currentItem: 2
+  itemSwitchTag: 0
 --- !u!50 &1660059109
 Rigidbody2D:
   serializedVersion: 4
