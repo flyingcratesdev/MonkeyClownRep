@@ -24,8 +24,7 @@ public class playerController : MonoBehaviour
     //StunGun
     public GameObject StunPellet;
     public GameObject Bullet;
-
-
+    private SugarEffect sugarEffect;
     public ItemPickUp potentialItem;
     public TMP_Text itemText;
     //ID bananna, stunball, 
@@ -166,7 +165,7 @@ public class playerController : MonoBehaviour
             case 3:
                 if (Input.GetKeyDown(KeyCode.Mouse0) && !isFast && uses[itemSwitchTag] > 0)
                 {
-
+    
                     playerSpeed *= 2;
                     Invoke("SpeedReset", 2  );
 
@@ -174,6 +173,7 @@ public class playerController : MonoBehaviour
                     slots[itemSwitchTag].GetComponentInChildren<TMP_Text>().text = "" + uses[itemSwitchTag];
 
                     isFast = true;
+                    GetComponent<SugarEffect>().ActivateSugarEffect();
                 }
                 break;
             case 4:
