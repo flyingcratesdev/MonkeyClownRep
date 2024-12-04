@@ -11,10 +11,7 @@ public class Door : MonoBehaviour
     private Vector2 currentVelocity;   // Stores the current velocity
 
 
-    void Start()
-    {
-        Key.OnKeyCollected += UnlockDoor;
-    }
+    
     void Update()
     {
         if (isOpen)
@@ -40,12 +37,8 @@ public class Door : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
-    {
-        Key.OnKeyCollected -= UnlockDoor;
-    }
 
-    private void UnlockDoor()
+    public void UnlockDoor()
     {
         isLocked = false;
         GetComponent<SpriteRenderer>().color = Color.green;

@@ -168,7 +168,7 @@ public class playerController : MonoBehaviour
                 {
 
                     playerSpeed *= 2;
-                    Invoke("SpeedReset", 2);
+                    Invoke("SpeedReset", 2  );
 
                     uses[itemSwitchTag]--;
                     slots[itemSwitchTag].GetComponentInChildren<TMP_Text>().text = "" + uses[itemSwitchTag];
