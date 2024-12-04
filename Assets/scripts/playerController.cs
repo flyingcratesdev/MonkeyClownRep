@@ -38,6 +38,8 @@ public class playerController : MonoBehaviour
     public int[] uses = {0,0};
     float stunGunFirerate = 1;
     float timeStunGun;
+    public GameObject monkaGun;
+    [SerializeField] private Vector3 lastCheckPoint;
     // Start is called before the first frame update
     void Start()
     {
@@ -65,9 +67,12 @@ public class playerController : MonoBehaviour
             inventoryID[itemSwitchTag] = potentialItem.GetItem();
             currentItem = inventoryID[itemSwitchTag];
             uses[itemSwitchTag] = potentialItem.item.uses;
+           
             slots[itemSwitchTag].GetComponent<Image>().sprite = potentialItem.item.icon;
             Destroy(potentialItem.gameObject);
             slots[itemSwitchTag].GetComponentInChildren<TMP_Text>().text = "" + uses[itemSwitchTag];
+            VisualSwitch();
+
             potentialItem = null;
 
 
@@ -78,6 +83,23 @@ public class playerController : MonoBehaviour
 
     }
 
+    void VisualSwitch()
+    {
+        if (inventoryID[itemSwitchTag] == 4)
+        {
+            monkaGun.SetActive(true);
+
+        }
+        else
+        {
+            monkaGun.SetActive(false);
+
+
+        }
+
+
+
+    }
     void switchItem()
     {
         if (Input.GetKeyDown(KeyCode.Tab))
@@ -89,9 +111,10 @@ public class playerController : MonoBehaviour
             {
                 itemSwitchTag = 0;
             }
+          
             selector.transform.position = slots[itemSwitchTag].transform.position;
             currentItem = inventoryID[itemSwitchTag];
-         
+            VisualSwitch();
         }
 
         
@@ -213,14 +236,22 @@ public class playerController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.GetComponent<enemyScript>()) {
-            SceneManager.LoadScene(0);
-        
+            transform.position = lastCheckPoint;
+
+
         }
         if (collision.GetComponent<ItemPickUp>())
         {
             potentialItem = collision.GetComponent<ItemPickUp>();
 
         }
+        if (collision.GetComponent<CheckPoint>())
+        {
+            lastCheckPoint = collision.transform.position;
+
+
+        }
+
 
     }
 

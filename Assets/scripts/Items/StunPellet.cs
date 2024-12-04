@@ -8,6 +8,7 @@ public class StunPellet : MonoBehaviour
     public bool isBullet = false;
     public float force = 4;
     public float deathTime = 3f;
+    public Transform banana;
     void Awake()
     {
         GetComponent<Rigidbody2D>().AddForce(transform.up * force);
@@ -18,7 +19,7 @@ public class StunPellet : MonoBehaviour
 
     void Update()
     {
-        
+        banana.Rotate(0, 0, 3);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
