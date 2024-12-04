@@ -12,14 +12,13 @@ public class Key : MonoBehaviour
         if (other.CompareTag("Player"))
         {
 
-           // OnKeyCollected?.Invoke(); //Notify the key has been collected
+            // OnKeyCollected?.Invoke(); //Notify the key has been collected
+            doorScript.UnlockDoor();
+
             Destroy(gameObject); //Remove key from scene
         }
     }
 
-    private void OnDestroy()
-    {
-        doorScript.UnlockDoor();
-    }
+
 }
 
