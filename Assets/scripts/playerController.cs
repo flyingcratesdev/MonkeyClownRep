@@ -57,7 +57,6 @@ public class playerController : MonoBehaviour
     }
 
 
-
     void PickUpItem()
     {
         if (Input.GetKeyDown(KeyCode.E) && potentialItem != null)
