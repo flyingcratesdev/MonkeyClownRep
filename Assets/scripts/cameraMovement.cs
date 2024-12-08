@@ -12,12 +12,20 @@ public class cameraMovement : MonoBehaviour
     void Update()
     {
         Vector3 mousePosition = playerCamera.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 targetPosition = (mousePosition);
+
+        targetPosition.x = Mathf.Clamp(targetPosition.x, -threshold + player.position.x, threshold + player.position.x);
+        targetPosition.y = Mathf.Clamp(targetPosition.y, -threshold + player.position.y, threshold + player.position.y);
+        this.transform.position = targetPosition;
+
+
+/*
+        Vector3 mousePosition = playerCamera.ScreenToWorldPoint(Input.mousePosition);
         Vector3 targetPosition = (player.position + mousePosition);
 
         targetPosition.x = Mathf.Clamp(targetPosition.x, -threshold + player.position.x, threshold + player.position.x);
         targetPosition.y = Mathf.Clamp(targetPosition.y, -threshold + player.position.y, threshold + player.position.y);
-
-        this.transform.position = targetPosition;
+        this.transform.position = targetPosition;*/
     }
     public void SetThreshHold(float a)
     {

@@ -92,7 +92,7 @@ public class playerController : MonoBehaviour
         else
         {
             isHidden = false;
-            cameraScript.SetThreshHold(1.5f);
+            cameraScript.SetThreshHold(1);
 
 
         }

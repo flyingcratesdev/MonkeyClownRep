@@ -19,6 +19,7 @@ public class StunPellet : MonoBehaviour
 
     void Update()
     {
+        if(isBullet)
         banana.Rotate(0, 0, 3);
     }
 
