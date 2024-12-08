@@ -19,4 +19,10 @@ public class cameraMovement : MonoBehaviour
 
         this.transform.position = targetPosition;
     }
+    public void SetThreshHold(float a)
+    {
+        threshold = a;
+
+
+    }
 }

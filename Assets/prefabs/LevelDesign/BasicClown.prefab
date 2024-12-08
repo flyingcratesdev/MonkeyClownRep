@@ -441,7 +441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63638e24a8ca4fa4690bf81b494de0e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationSpeed: 5
+  rotationSpeed: 2
   view: {fileID: 6799175394092757760}
   patrolPoints:
   - {fileID: 8808393005763839223}

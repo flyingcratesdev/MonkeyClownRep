@@ -39,6 +39,7 @@ public class playerController : MonoBehaviour
     float timeStunGun;
     public GameObject monkaGun;
     [SerializeField] private Vector3 lastCheckPoint;
+    public cameraMovement cameraScript;
     // Start is called before the first frame update
     void Start()
     {
@@ -80,7 +81,24 @@ public class playerController : MonoBehaviour
 
 
     }
+    public void isHidding(bool a)
+    {
+        if(a)
+        {
+            isHidden = true;
+            cameraScript.SetThreshHold(4);
 
+        }
+        else
+        {
+            isHidden = false;
+            cameraScript.SetThreshHold(1.5f);
+
+
+        }
+
+
+    }
     void VisualSwitch()
     {
         if (inventoryID[itemSwitchTag] == 4)

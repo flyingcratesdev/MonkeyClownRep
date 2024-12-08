@@ -133,6 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a078366afcd9b0d44afae2ce7ea27b28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  doorScript: {fileID: 0}
 --- !u!1001 &5762096736772380387
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -141,6 +142,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1073313026659830912, guid: ab95f15bc96a3a14393fc9fdc86ac1d7, type: 3}
+      propertyPath: rotationSpeed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3314004689893418870, guid: ab95f15bc96a3a14393fc9fdc86ac1d7, type: 3}
       propertyPath: m_Color.b
       value: 0.8132019
