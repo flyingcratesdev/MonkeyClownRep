@@ -21,6 +21,8 @@ public class playerController : MonoBehaviour
     public bool isHidden = false;
     Vector2 mousePosition;
 
+    audioManager audioManager;
+
     //StunGun
     public GameObject StunPellet;
     public GameObject Bullet;
@@ -58,6 +60,10 @@ public class playerController : MonoBehaviour
         switchItem();
     }
 
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<audioManager>();
+    }
 
     void PickUpItem()
     {
@@ -74,6 +80,7 @@ public class playerController : MonoBehaviour
             VisualSwitch();
 
             potentialItem = null;
+            audioManager.playSound(audioManager.sfx1);
 
 
 
@@ -206,6 +213,7 @@ public class playerController : MonoBehaviour
 
                     isFast = true;
                     GetComponent<SugarEffect>().ActivateSugarEffect();
+                    audioManager.playSound(audioManager.sfx5);
                     if (uses[itemSwitchTag] <= 0)
                     {
 
@@ -219,6 +227,8 @@ public class playerController : MonoBehaviour
                 if (Input.GetKey(KeyCode.Mouse0) && uses[itemSwitchTag] > 0 && timeStunGun <= 0)
                 {
                     GameObject ball = Instantiate(Bullet, firePoint.position, firePoint.rotation);
+                    audioManager.playSound(audioManager.sfx4);
+
 
                     uses[itemSwitchTag]--;
                     slots[itemSwitchTag].GetComponentInChildren<TMP_Text>().text = "" + uses[itemSwitchTag];
