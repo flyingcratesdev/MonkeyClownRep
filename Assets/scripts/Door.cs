@@ -48,6 +48,7 @@ public class Door : MonoBehaviour
     {
         if (collision.GetComponent<playerController>() && !isLocked)
         {
+            collision.GetComponent<playerController>().HasKey(false);
             isOpen = true;
         }
     }

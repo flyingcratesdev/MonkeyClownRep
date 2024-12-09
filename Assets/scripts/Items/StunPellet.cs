@@ -9,6 +9,7 @@ public class StunPellet : MonoBehaviour
     public float force = 4;
     public float deathTime = 3f;
     public Transform banana;
+    public int damage = 1;
     void Awake()
     {
         GetComponent<Rigidbody2D>().AddForce(transform.up * force);
@@ -25,17 +26,19 @@ public class StunPellet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.GetComponent<enemyScript>()) {
+        if (collision.GetComponent<enemyScript>())
+        {
 
-            if(!isBullet)
+            if (!isBullet)
             {
                 collision.GetComponent<enemyScript>().StunPlayer();
                 Destroy(gameObject);
 
 
-            }else
+            }
+            else
             {
-                collision.GetComponent<enemyScript>().TakeDamage();
+                collision.GetComponent<enemyScript>().TakeDamage(damage);
                 Destroy(gameObject);
 
 
@@ -44,5 +47,12 @@ public class StunPellet : MonoBehaviour
 
 
         }
+        if (collision.GetComponent<ClownHealth>() && isBullet)
+        {
+            collision.GetComponent<ClownHealth>().TakeDamage(damage);
+            Destroy(gameObject);
+
+
+        }
     }
-}
+    }

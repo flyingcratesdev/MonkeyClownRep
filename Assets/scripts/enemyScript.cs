@@ -34,6 +34,8 @@ public class enemyScript : MonoBehaviour
     public int health;
     public int maxHealth = 4;
     public GameObject baseClown;
+    public GameObject playerDetectedVisual;
+    public float seenSpeedMult = 2f;
     void Start()
     {
         health = maxHealth;
@@ -55,18 +57,23 @@ public class enemyScript : MonoBehaviour
         {
             if (spottedTimer > 0)
             {
-                agent.speed = moveSpeed * 1.5f;
+                agent.speed = moveSpeed * seenSpeedMult;
 
                 stateID = 1;
                 spottedTimer -= Time.deltaTime;
             }
             else if (currentDistraction != null)
             {
+                agent.speed = moveSpeed;
 
+                playerDetectedVisual.SetActive(false);
                 stateID = 2;
             }
             else
             {
+                playerDetectedVisual.SetActive(false);
+                agent.speed = moveSpeed;
+
                 stateID = 0;
             }
 
@@ -159,10 +166,10 @@ public class enemyScript : MonoBehaviour
         Destroy(currentDistraction);
     }
 
-    public void TakeDamage()
+    public void TakeDamage(int a)
     {
 
-        health--;
+        health -= a;
         if(health <= 0)
         {
             Destroy(baseClown); 
@@ -173,6 +180,7 @@ public class enemyScript : MonoBehaviour
     }
     public void PlayerFound()
     {
+        playerDetectedVisual.SetActive(true);
         spottedTimer = spottedTime;
     }
     public void PlayerHidden()

@@ -40,6 +40,7 @@ public class playerController : MonoBehaviour
     public GameObject monkaGun;
     [SerializeField] private Vector3 lastCheckPoint;
     public cameraMovement cameraScript;
+    [SerializeField] private GameObject keyVisual;
     // Start is called before the first frame update
     void Start()
     {
@@ -159,6 +160,13 @@ public class playerController : MonoBehaviour
 
 
                 }
+                if (uses[itemSwitchTag] <= 0)
+                {
+
+
+                    RemoveItem();
+
+                }
 
                 break;
             case 2:
@@ -177,6 +185,13 @@ public class playerController : MonoBehaviour
                     timeStunGun -= Time.deltaTime;
 
                 }
+                if (uses[itemSwitchTag] <= 0)
+                {
+
+
+                    RemoveItem();
+
+                }
 
                 break;
             case 3:
@@ -191,6 +206,13 @@ public class playerController : MonoBehaviour
 
                     isFast = true;
                     GetComponent<SugarEffect>().ActivateSugarEffect();
+                    if (uses[itemSwitchTag] <= 0)
+                    {
+
+
+                        RemoveItem();
+
+                    }
                 }
                 break;
             case 4:
@@ -209,13 +231,28 @@ public class playerController : MonoBehaviour
                     timeStunGun -= Time.deltaTime;
 
                 }
+                if(uses[itemSwitchTag] <= 0)
+                {
+
+
+                    RemoveItem();
+
+                }
 
                 break;
         }
 
-
+        
 
       
+
+
+    }
+    void RemoveItem()
+    {
+        currentItem = 0;
+        slots[itemSwitchTag].GetComponent<Image>().sprite = null;
+        VisualSwitch();
 
 
     }
@@ -252,7 +289,7 @@ public class playerController : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.GetComponent<enemyScript>()) {
+        if(collision.GetComponent<enemyScript>() || collision.GetComponent<ZombieClown>()) {
             transform.position = lastCheckPoint;
 
 
@@ -280,5 +317,12 @@ public class playerController : MonoBehaviour
 
 
         }
+    }
+
+    public void HasKey(bool a)
+    {
+
+        keyVisual.SetActive(a);
+
     }
 }
