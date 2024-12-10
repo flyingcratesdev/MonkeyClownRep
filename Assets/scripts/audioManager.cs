@@ -21,7 +21,8 @@ public class audioManager : MonoBehaviour
     }
 
     public void playSound(AudioClip clip)
-    {
+    { 
+        soundEffects.pitch = Random.Range(0.8f,1.2f);
         soundEffects.PlayOneShot(clip);
     }
 }
