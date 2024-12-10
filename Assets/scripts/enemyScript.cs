@@ -36,6 +36,8 @@ public class enemyScript : MonoBehaviour
     public GameObject baseClown;
     public GameObject playerDetectedVisual;
     public float seenSpeedMult = 2f;
+    public bool isSleeping = false;
+
     void Start()
     {
         health = maxHealth;
@@ -43,6 +45,13 @@ public class enemyScript : MonoBehaviour
         agent.updateRotation = false;
         agent.updateUpAxis = false;
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        if(stateID == 3)
+        {
+
+            isSleeping = true;
+            view.SetSleeping(true);
+        }
+
     }
 
     // Update is called once per frame
@@ -53,7 +62,7 @@ public class enemyScript : MonoBehaviour
         float targetAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg - 90f;
 
         float angle = Mathf.LerpAngle(transform.eulerAngles.z, targetAngle, rotationSpeed * Time.deltaTime);
-        if (!isStunned)
+        if (!isStunned && !isSleeping)
         {
             if (spottedTimer > 0)
             {
@@ -88,7 +97,12 @@ public class enemyScript : MonoBehaviour
                 spottedTimer -= Time.deltaTime;
             }
         }
-        if(stateID == 2)
+        if(stateID == 3)
+        {
+
+
+        }
+        else if(stateID == 2)
         {
             agent.SetDestination(currentDistraction.transform.position);
             if (Vector2.Distance(transform.position, currentDistraction.transform.position) <= 0.5f)

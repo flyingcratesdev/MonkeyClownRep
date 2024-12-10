@@ -342,6 +342,7 @@ MonoBehaviour:
   startingAngle: 0
   viewDistance: 5
   enemy: {fileID: 1073313026659830912}
+  isSleeping: 0
 --- !u!33 &2040455083697544513
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -357,7 +358,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5426800235055098663}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -470,6 +471,7 @@ MonoBehaviour:
   baseClown: {fileID: 5084043181814869715}
   playerDetectedVisual: {fileID: 8743033595546386986}
   seenSpeedMult: 2
+  isSleeping: 0
 --- !u!212 &6479399145284599832
 SpriteRenderer:
   m_ObjectHideFlags: 0

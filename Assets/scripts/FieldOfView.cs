@@ -16,6 +16,7 @@ public class FieldOfView : MonoBehaviour
     int rayCount = 40;
     public float viewDistance = 5f;
     public enemyScript enemy;
+    public bool isSleeping = false;
     void Start()
     {
         transform.position = new Vector3(0,0,0f);
@@ -23,8 +24,26 @@ public class FieldOfView : MonoBehaviour
         GetComponent<MeshFilter>().mesh = mesh;
        
     }
-    
 
+    public void SetSleeping(bool a)
+    {
+        if (a)
+        {
+            isSleeping = true;
+            fov = 360;
+            viewDistance = 2;
+        }
+        else
+
+        {
+
+            isSleeping = false;
+            viewDistance = 5;
+            fov = 75;
+
+        }
+
+    }
 
     public Vector3 GetVectorFromAngle(float angle)
     {
@@ -71,7 +90,12 @@ public class FieldOfView : MonoBehaviour
             {
                 if (raycastHit2D.collider.GetComponent<playerController>())
                 {
-                    if (raycastHit2D.collider.GetComponent<playerController>().isHidden)
+                    if(isSleeping)
+                    {
+                        SetSleeping(false);
+                        enemy.isSleeping = false;
+                    }
+                    else if (raycastHit2D.collider.GetComponent<playerController>().isHidden)
                     {
                         enemy.PlayerHidden();
 
