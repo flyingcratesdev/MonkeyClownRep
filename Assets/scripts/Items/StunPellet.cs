@@ -26,6 +26,10 @@ public class StunPellet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if(collision.gameObject.layer == 6)
+        {
+            Destroy(this.gameObject);
+        }
         if (collision.GetComponent<enemyScript>())
         {
 
