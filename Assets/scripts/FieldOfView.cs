@@ -93,7 +93,7 @@ public class FieldOfView : MonoBehaviour
                     if(isSleeping)
                     {
                         SetSleeping(false);
-                        enemy.isSleeping = false;
+                        enemy.StopSleeping();
                     }
                     else if (raycastHit2D.collider.GetComponent<playerController>().isHidden)
                     {

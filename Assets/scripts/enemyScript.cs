@@ -39,9 +39,16 @@ public class enemyScript : MonoBehaviour
     public GameObject playerDetectedVisual;
     public float seenSpeedMult = 2f;
     public bool isSleeping = false;
+    public bool isHornClown  = false;
+    private WakeCall callScript;
+    public GameObject fxSLeeping;
 
     void Start()
     {
+        if(isHornClown)
+        {
+            callScript = GetComponent<WakeCall>();
+        }
         health = maxHealth;
         agent.speed = moveSpeed;
         agent.updateRotation = false;
@@ -53,6 +60,14 @@ public class enemyScript : MonoBehaviour
             isSleeping = true;
             view.SetSleeping(true);
         }
+
+    }
+    public void StopSleeping()
+    {
+        fxSLeeping.SetActive(false);
+        isSleeping = false;
+        view.SetSleeping(false);
+        PlayerFound();
 
     }
     private void Awake()
@@ -72,6 +87,12 @@ public class enemyScript : MonoBehaviour
         {
             if (spottedTimer > 0)
             {
+                if(isHornClown)
+                {
+
+                    callScript.WakeUp();
+                    isHornClown = false;
+                }
                 agent.speed = moveSpeed * seenSpeedMult;
 
                 stateID = 1;

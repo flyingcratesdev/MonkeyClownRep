@@ -43,9 +43,11 @@ public class playerController : MonoBehaviour
     [SerializeField] private Vector3 lastCheckPoint;
     public cameraMovement cameraScript;
     [SerializeField] private GameObject keyVisual;
+    public enemyScript[] allEnemies;
     // Start is called before the first frame update
     void Start()
     {
+        allEnemies = FindObjectsOfType<enemyScript>();
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -312,7 +314,10 @@ public class playerController : MonoBehaviour
         if (collision.GetComponent<CheckPoint>())
         {
             lastCheckPoint = collision.transform.position;
-
+            foreach(enemyScript scripts in allEnemies)
+            {
+                scripts.PlayerHidden();
+            }
 
         }
 
