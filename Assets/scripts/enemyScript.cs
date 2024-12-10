@@ -24,6 +24,8 @@ public class enemyScript : MonoBehaviour
     int previousIndex = -1;
     float minDistance = 0.4f;
 
+    audioManager audioManager;
+
     public float stunTimer = 3;
     public float destroyTimer = 3;
     public bool isStunned = false;
@@ -52,6 +54,10 @@ public class enemyScript : MonoBehaviour
             view.SetSleeping(true);
         }
 
+    }
+    private void Awake()
+    {
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<audioManager>();
     }
 
     // Update is called once per frame
@@ -186,7 +192,8 @@ public class enemyScript : MonoBehaviour
         health -= a;
         if(health <= 0)
         {
-            Destroy(baseClown); 
+            Destroy(baseClown);
+            audioManager.playSound(audioManager.sfx3);
 
         }
 
