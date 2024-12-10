@@ -13,6 +13,7 @@ public class audioManager : MonoBehaviour
     public AudioClip sfx3;
     public AudioClip sfx4;
     public AudioClip sfx5;
+    public AudioClip sfx6;
 
     private void Start()
     {

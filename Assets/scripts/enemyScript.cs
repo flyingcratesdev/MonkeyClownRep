@@ -48,13 +48,14 @@ public class enemyScript : MonoBehaviour
         if(isHornClown)
         {
             callScript = GetComponent<WakeCall>();
+
         }
         health = maxHealth;
         agent.speed = moveSpeed;
         agent.updateRotation = false;
         agent.updateUpAxis = false;
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        if(stateID == 3)
+        if (stateID == 3)
         {
 
             isSleeping = true;

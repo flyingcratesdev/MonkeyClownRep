@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class WakeCall : MonoBehaviour
 {
+
+    audioManager audioManager;
+
     public List<enemyScript> wakeClowns;
-    void Start()
+    private void Awake()
     {
-        
+        audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<audioManager>();
     }
 
     // Update is called once per frame
@@ -20,7 +23,7 @@ public class WakeCall : MonoBehaviour
 
     public void WakeUp()
     {
-
+        audioManager.playSound(audioManager.sfx6);
         foreach (enemyScript script in wakeClowns)
         {
 
