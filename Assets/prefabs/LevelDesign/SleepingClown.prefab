@@ -5116,7 +5116,7 @@ GameObject:
   - component: {fileID: 8222252744047869863}
   - component: {fileID: 6790088489279192353}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: SleepyEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
