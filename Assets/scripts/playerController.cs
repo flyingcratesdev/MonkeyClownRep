@@ -216,6 +216,7 @@ public class playerController : MonoBehaviour
                     isFast = true;
                     GetComponent<SugarEffect>().ActivateSugarEffect();
                     audioManager.playSound(audioManager.sfx5);
+                    
                     if (uses[itemSwitchTag] <= 0)
                     {
 
